@@ -18,7 +18,8 @@ npm install -D nodemon
 
 HABIT TRACKER <br>
 ├── assets <br>
-| --- ├── page.es <br>
+| --- ├── page.js <br>
+├── node_modules <br>
 ├── views <br>
 │ --- ├── details.ejs <br>
 ├── .env <br>
