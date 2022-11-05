@@ -1,0 +1,139 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+    integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+
+</style>
+<div class="container">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand" href="#"><%= Title %></a> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link <% if (DetailActive) { %>
+                     <%= " active" %>
+                            <% } %>" aria-current="page" href="/detail">Detail View
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <% if (!DetailActive) { %>
+                                         <%= " active" %>
+                            <% } %>" href="/week">Week View
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<% if (DetailActive) { %>
+    <div class="container">
+
+        <br>
+        <div class="row g-3">
+            <div class="col-5">
+                <input type="text" class="form-control" placeholder="Name of Habit" id="Name">
+            </div>
+            <div class="col-5">
+                <input type="time" class="form-control" id="Time">
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-primary" onclick="addHabit()"><i class="bi bi-plus-circle"></i> Add
+                    Habit</button>
+            </div>
+        </div>
+
+
+        <% habits.forEach(element=> { %>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    <div class="row g-3">
+                        <h4 class="col-11">
+                            <%= element.name %>
+                        </h4>
+                        <div class="col-1">
+                            <button class="btn btn-danger" onclick="deleteHabit('<%= element.ID %>')">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col">Time : <%= element.Time %>
+                        </div>
+                        <div class="col">Current Streak : <%= element.Current %>
+                        </div>
+                        <div class="col">Best Streak : <%= element.BestStreak %>
+                        </div>
+                        <div class="col">Efficiency : <%= element.TotalDone %> / <%= element.TotalTracked %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+    <% } else { %>
+        <br>
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <input type="week" class="form-control weekselector" name="" id="week" />
+                </div>
+                <div class="col-4"></div>
+            </div>
+            <% habits.forEach(element=> { %>
+                <br>
+                <div class="card habit">
+                    <div class="card-header">
+                        <h4>
+                            <%= element.name %>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col">Time : <%= element.Time %>
+                            </div>
+                            <div class="col d-none" id="ID">
+                                <%= element.ID %>
+                            </div>
+                            <div class="col">Current Streak : <%= element.Current %>
+                            </div>
+                            <div class="col">Best Streak : <%= element.BestStreak %>
+                            </div>
+                            <div class="col">Efficiency : <%= element.TotalDone %> / <%= element.TotalTracked %>
+                            </div>
+                        </div>
+                        <div class="row g-3 calenderArea" id="calender">
+                            
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+        <% } %>
+
+
+
+
+
+
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+                integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+                integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+                crossorigin="anonymous"></script>
+            <script src="Page.js"></script>
